@@ -1,8 +1,9 @@
 ---
 plan: morning-digest
-status: ready
+status: done
 owner: rook
 opened: 2026-10-29
+closed: 2026-10-30
 ---
 
 # Morning digest
@@ -77,3 +78,21 @@ page again with `LANE_MARKER` unset (the banner reads "no marker set") and uploa
 link. Move this plan to `docs/plans/done/` with its issue list.
 
 Done when: the preview link no longer shows the lane marker.
+
+
+## Issue list
+
+- [#1 Define digest contract](https://github.com/grzegorzludwa/mega-s01e04-before-i-looked/issues/1)
+- [#2 Implement run log reader](https://github.com/grzegorzludwa/mega-s01e04-before-i-looked/issues/2)
+- [#3 Render digest page](https://github.com/grzegorzludwa/mega-s01e04-before-i-looked/issues/3)
+- [#4 Serve digest JSON](https://github.com/grzegorzludwa/mega-s01e04-before-i-looked/issues/4)
+- [#5 Link nights from status board](https://github.com/grzegorzludwa/mega-s01e04-before-i-looked/issues/5)
+- [#6 Test digest routes](https://github.com/grzegorzludwa/mega-s01e04-before-i-looked/issues/6)
+- [#7 Publish and submit review preview](https://github.com/grzegorzludwa/mega-s01e04-before-i-looked/issues/7)
+- [#8 Remove marker and archive plan](https://github.com/grzegorzludwa/mega-s01e04-before-i-looked/issues/8)
+
+## Review and cleanup record
+
+The reviewer saw the preview before cleanup. After separate student approval, the marker-free page was published to the same stable URL and verified with the banner “no marker set” and no lane marker present.
+
+Preview: https://grzegorzludwa.github.io/mega-s01e04-before-i-looked/
