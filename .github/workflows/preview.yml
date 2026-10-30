@@ -1,0 +1,56 @@
+name: Publish digest preview
+
+on:
+  workflow_dispatch:
+    inputs:
+      include_marker:
+        description: Include the lane marker (requires LANE_MARKER secret)
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 12.16.1
+          run_install: false
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm test
+      - run: pnpm typecheck
+      - name: Export marked preview
+        if: inputs.include_marker
+        env:
+          LANE_MARKER: ${{ secrets.LANE_MARKER }}
+        run: pnpm preview:export --out "$RUNNER_TEMP/rig-preview" --marker true
+      - name: Export without marker
+        if: ${{ !inputs.include_marker }}
+        run: pnpm preview:export --out "$RUNNER_TEMP/rig-preview" --marker false
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: ${{ runner.temp }}/rig-preview
+          retention-days: 1
+      - name: Deploy preview
+        id: deployment
+        uses: actions/deploy-pages@v4
